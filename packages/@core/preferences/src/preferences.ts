@@ -128,8 +128,10 @@ class PreferenceManager {
     // 使用命名空间初始化存储管理器
     this.cache = new StorageManager({ prefix: namespace });
 
-    // 合并初始偏好设置：前面的对象优先，后面的对象仅补齐缺失字段
+    // 合并初始偏好设置：overrides 优先于 defaultPreferences
     this.initialPreferences = merge({}, overrides, defaultPreferences);
+    // 保存一份 overrides 的引用，用于后续覆盖缓存中的过时值
+    const overridesSnapshot = overrides ? merge({}, overrides) : {};
     this.customPreferencesExtension = extension ?? null;
     this.initialCustomPreferences = this.resolveCustomPreferencesDefaults(
       this.customPreferencesExtension,
@@ -147,8 +149,15 @@ class PreferenceManager {
       this.initialPreferences, // 初始设置仅补齐缺失字段
     );
 
+    // 用 overrides 覆盖缓存中的值，确保配置更新能覆盖过时的缓存数据
+    const finalPreferences = mergeWithArrayOverride(
+      {},
+      overridesSnapshot,
+      mergedPreference,
+    );
+
     // 更新偏好设置
-    this.updatePreferences(mergedPreference);
+    this.updatePreferences(finalPreferences);
 
     const cachedCustom = (await this.loadCustomFromCache()) || {};
     this.replaceCustomPreferences(
