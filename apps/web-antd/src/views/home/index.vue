@@ -1,9 +1,14 @@
 <script setup lang="ts">
-import { usePreferences } from '@vben/preferences';
-
-import { Button, Card, Col, Row, Space, Statistic, Tag, Typography } from 'ant-design-vue';
-
-const { isDark } = usePreferences();
+import {
+  Button,
+  Card,
+  Col,
+  Row,
+  Space,
+  Statistic,
+  Tag,
+  Typography,
+} from 'ant-design-vue';
 
 const features = [
   {
@@ -40,17 +45,24 @@ const stats = [
   <div class="home-page">
     <!-- Hero 区域 -->
     <div class="hero-section mb-8 text-center">
-      <Typography.Title :level="2" class="mb-2">
-        Vben Admin
-      </Typography.Title>
+      <Typography.Title :level="2" class="mb-2"> Vben Admin </Typography.Title>
       <Typography.Paragraph class="text-lg text-muted-foreground mb-6">
         基于 Vue 3 的企业级中后台管理系统框架
       </Typography.Paragraph>
       <Space size="middle">
-        <Button type="primary" size="large" href="https://doc.vben.pro" target="_blank">
+        <Button
+          type="primary"
+          size="large"
+          href="https://doc.vben.pro"
+          target="_blank"
+        >
           查看文档
         </Button>
-        <Button size="large" href="https://github.com/vbenjs/vue-vben-admin" target="_blank">
+        <Button
+          size="large"
+          href="https://github.com/vbenjs/vue-vben-admin"
+          target="_blank"
+        >
           GitHub
         </Button>
       </Space>
@@ -66,11 +78,15 @@ const stats = [
     </Row>
 
     <!-- 特性区域 -->
-    <Typography.Title :level="3" class="mb-4">
-      项目特性
-    </Typography.Title>
+    <Typography.Title :level="3" class="mb-4"> 项目特性 </Typography.Title>
     <Row :gutter="[16, 16]">
-      <Col v-for="feature in features" :key="feature.title" :xs="24" :sm="12" :lg="6">
+      <Col
+        v-for="feature in features"
+        :key="feature.title"
+        :xs="24"
+        :sm="12"
+        :lg="6"
+      >
         <Card class="h-full">
           <div class="text-center">
             <div class="text-4xl mb-3">{{ feature.icon }}</div>
@@ -87,9 +103,7 @@ const stats = [
 
     <!-- 技术栈标签 -->
     <div class="mt-8">
-      <Typography.Title :level="3" class="mb-4">
-        技术栈
-      </Typography.Title>
+      <Typography.Title :level="3" class="mb-4"> 技术栈 </Typography.Title>
       <div class="flex flex-wrap gap-2">
         <Tag color="blue">Vue 3</Tag>
         <Tag color="cyan">Vite 8</Tag>
@@ -108,8 +122,8 @@ const stats = [
 <style scoped>
 .home-page {
   max-width: 1200px;
-  margin: 0 auto;
   padding: 24px;
+  margin: 0 auto;
 }
 
 .hero-section {
